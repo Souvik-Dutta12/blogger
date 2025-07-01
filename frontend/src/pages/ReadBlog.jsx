@@ -78,7 +78,7 @@ const ReadBlog = () => {
         setComments(commentData || []);
       }
     } catch (error) {
-
+      toast.error("No comments found");
     }
 
 
