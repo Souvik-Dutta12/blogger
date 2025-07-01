@@ -1,0 +1,156 @@
+@import 'remixicon/fonts/remixicon.css';
+@import "tailwindcss";
+
+
+
+
+@theme inline {
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+
+  --shadow-input: 0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+  0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+  0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+}
+
+
+
+/* Container */
+.ql-container {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #52525b !important;
+  /* tailwind zinc-600 */
+  border-radius: 0 0 0.75rem 0.75rem;
+  /* rounded-b-xl */
+}
+
+/* Toolbar */
+.ql-toolbar {
+  background-color: #18181b;
+  /* tailwind zinc-900 */
+  border: 1px solid #737373 !important;
+  /* tailwind zinc-500 */
+  border-radius: 0.75rem 0.75rem 0 0;
+  /* rounded-t-xl */
+}
+
+/* Editor */
+.ql-editor {
+  min-height: 20rem;
+  /* min-h-80 (80 * 0.25rem = 20rem) */
+  font-size: 1rem;
+  /* text-md */
+  font-weight: 400;
+  /* font-normal */
+  padding: 0.5rem 1rem;
+  /* py-2 (0.5rem) px-4 (1rem) */
+  background-color: #18181b;
+  /* zinc-900 */
+  color: white;
+  border-radius: 0.75rem;
+  /* rounded-xl */
+  resize: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Editor focus states */
+.ql-editor:focus {
+  outline: none;
+  box-shadow: 0 0 0 0px transparent;
+}
+
+/* Placeholder styling */
+.ql-editor::before {
+  color: #9ca3af !important;
+  /* Force gray-400 color */
+  font-style: italic;
+  font-size: 1rem;
+  opacity: 0.7;
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  pointer-events: none;
+}
+
+.ql-editor:not(.ql-blank)::before {
+  display: none;
+}
+
+/* Optional: remove toolbar button borders to match Tailwind "border-none" */
+.ql-toolbar button {
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: #d4d4d8;
+  /* text-zinc-300 */
+}
+
+.ql-toolbar button:hover {
+  background-color: #27272a;
+  /* bg-zinc-800 */
+  color: #f4f4f5 !important;
+  /* text-zinc-100 */
+}
+
+.ql-toolbar button.ql-active {
+  background-color: #3f3f46;
+  /* bg-zinc-700 */
+  color: #ffffff;
+}
+
+.ql-editor::before {
+  color: #9ca3af;
+  /* Tailwind gray-400 */
+  font-style: italic;
+  font-size: 1rem;
+  /* text-md */
+  opacity: 0.7;
+  content: attr(data-placeholder);
+  /* uses the placeholder prop */
+}
+
+
+.blog-content {
+  /* ensure Quill styles apply */
+  all: revert;
+  font-family: sans-serif;
+  line-height: 1.6;
+}
+
+@layer components {
+  /* Optional: Ensure headers inside prose have correct font sizes */
+  .custom-prose h1 {
+    @apply text-4xl font-bold;
+  }
+
+  .custom-prose h2 {
+    @apply text-3xl font-semibold;
+  }
+
+  .custom-prose h3 {
+    @apply text-2xl font-medium;
+  }
+   .custom-prose a {
+    @apply text-sky-500 underline;
+  }
+
+  .custom-prose a:hover {
+    @apply text-sky-600;
+  }
+
+}
+
+.custom-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.custom-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
