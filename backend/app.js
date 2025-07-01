@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 app.use(cors({
-    origin: 'http://blogger-orcin-five.vercel.app',
+    origin: 'https://blogger-orcin-five.vercel.app',
     credentials: true
 }));
 
