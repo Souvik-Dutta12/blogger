@@ -10,7 +10,7 @@ import { getGeminiColorForTag } from "../utils/getColorFromAi.js";
 
 
 const createBlog = asyncHandler(async (req, res) => {
-  try {
+
     const {
       title,
       slug,
@@ -85,14 +85,8 @@ const createBlog = asyncHandler(async (req, res) => {
     return res.status(201).json(
       new ApiResponse(201, blog, "Blog created successfully")
     );
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-      error: error.message
-    });
   }
-});
+);
 
 const generateAIDescriptionOnly = asyncHandler(async (req, res) => {
   const { title, shortDescription } = req.body;
@@ -274,11 +268,8 @@ const toggleStatus = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Blog not found")
   }
 
-  if (blog.status === "draft") {
-    blog.status = "published"
-  } else {
-    blog.status = "draft"
-  }
+  blog.status = blog.status === "draft" ? "published" : "draft";
+  await blog.save();
 
 
   return res.status(200)
