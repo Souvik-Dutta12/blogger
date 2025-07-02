@@ -42,7 +42,7 @@ View the complete source code:
 - Express.js
 - MongoDB Atlas
 - Mongoose
-- OpenAI API (for AI descriptions)
+- Gemini (for AI descriptions)
 
 **Deployment**:
 - Frontend: [Vercel](w)
