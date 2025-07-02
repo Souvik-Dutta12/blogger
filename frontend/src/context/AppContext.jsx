@@ -3,6 +3,7 @@ import { createContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import {jwtDecode} from "jwt-decode";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -27,24 +28,24 @@ export const AppProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        
+
         fetchBlogs();
 
     }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-    const storedUser = localStorage.getItem("user") || sessionStorage.getItem("user");
+    useEffect(() => {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        const storedUser = localStorage.getItem("user") || sessionStorage.getItem("user");
 
-    if (storedUser) {
-        setUser(JSON.parse(storedUser));
-    }
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
 
-    if (token) {
-        setToken(token);
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-}, []);
+        if (token) {
+            setToken(token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        }
+    }, []);
 
     useEffect(() => {
         if (user) {
@@ -64,6 +65,44 @@ export const AppProvider = ({ children }) => {
             localStorage.removeItem("token");
         }
     }, [token]);
+
+    useEffect(() => {
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      const now = Date.now() / 1000; // Current time in seconds
+
+      if (decoded.exp && decoded.exp < now) {
+        // Token is expired
+        toast.info("Session expired. Logging you out...");
+        setToken(null);
+        setUser(null);
+        localStorage.clear();
+        sessionStorage.clear();
+        delete axios.defaults.headers.common["Authorization"];
+        navigate("/login");
+      } else {
+        // Optional: auto logout when it expires in the future
+        const timeout = (decoded.exp - now) * 1000; // ms until expiry
+
+        const timer = setTimeout(() => {
+          toast.info("Session expired. Logging you out...");
+          setToken(null);
+          setUser(null);
+          localStorage.clear();
+          sessionStorage.clear();
+          delete axios.defaults.headers.common["Authorization"];
+          navigate("/login");
+        }, timeout);
+
+        return () => clearTimeout(timer); // clean on unmount
+      }
+    } catch (err) {
+      console.error("Failed to decode token", err);
+    }
+  }
+}, [token]);
+
 
     const value = {
         axios,

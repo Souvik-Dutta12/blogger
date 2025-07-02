@@ -53,7 +53,7 @@ const Collection = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center mt-10 items-stretch">
         {filteredBlogs.map((blog, index) => (
           <CardContainer key={blog._id} className="inter-var">
-            <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full sm:w-[22rem] h-[500px] flex flex-col rounded-xl p-6 border">
+            <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1]  w-[90vw] max-w-[22rem] md:w-[22rem]  h-[500px] flex flex-col rounded-xl p-6 border">
 
               <div className='flex flex-col justify-evenly h-full'>
                 <CardItem className="text-xl font-bold text-neutral-600 dark:text-white">

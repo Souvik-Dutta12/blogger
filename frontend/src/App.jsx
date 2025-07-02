@@ -1,4 +1,4 @@
-import React from 'react'
+import {react, useState, useEffect} from 'react'
 import Nav from './components/Nav'
 
 import { Route, Router, Routes } from 'react-router-dom'
@@ -11,7 +11,6 @@ import ReadBlog from './pages/ReadBlog'
 import Total from './pages/Total'
 import Draft from './pages/Draft'
 import { ToastContainer } from 'react-toastify';
-import { useAppContext } from './context/AppContext'
 import Update from './components/Update'
 import Continue from './components/Continue'
 import Profile from './pages/Profile'
@@ -21,7 +20,6 @@ import "react-quill/dist/quill.snow.css"; // ✅ Required for Quill formatting
 
 const App = () => {
 
-  const { token } = useAppContext();
 
   return (
     <div className='w-screen h-auto '>
