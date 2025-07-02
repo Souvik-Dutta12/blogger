@@ -179,7 +179,7 @@ const Total = () => {
                 <button
                   onClick={handleDeleteBlog}
                   disabled={confirmationInput.trim() !== blogToDelete.title}
-                  className={`px-4 py-2  rounded-xl text-white ${confirmationInput.trim() === blogToDelete.title
+                  className={`px-4 py-2  rounded-xl text-white ${confirmationInput.trim().toLowerCase() === blogToDelete.title.toLowerCase()
                     ? "bg-red-500 hover:bg-red-700 cursor-pointer"
                     : "bg-red-300 cursor-not-allowed"
                     }`}
