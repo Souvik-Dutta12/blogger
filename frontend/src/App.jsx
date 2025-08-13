@@ -49,7 +49,7 @@ const App = () => {
         <Route path='/blogs/:slug' element={<Update />} />
         <Route path='/blogs/continue/:slug' element={<Continue />} />
         <Route path='/users/user/:userId' element={<Profile />} />
-        <Route path="*" element={<div>404 - Page Not Found</div>} />
+        <Route path="*" element={<div className=' text-7xl ml-[25%] font-bold mt-70 '>404 - Page Not Found</div>} />
       </Routes>
 
 
